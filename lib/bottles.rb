@@ -2,28 +2,10 @@ class Bottles
   BOTTLE_COUNT = 99
 
   def verse(num)
-    case num
-    when 0
-      "No more bottles of beer on the wall, " +
-      "no more bottles of beer.\n" +
-      "Go to the store and buy some more, " +
-      "99 bottles of beer on the wall.\n"
-    when 1
-      "1 bottle of beer on the wall, " +
-      "1 bottle of beer.\n" +
-      "Take it down and pass it around, " +
-      "no more bottles of beer on the wall.\n"
-    when 2
-      "2 bottles of beer on the wall, " +
-      "2 bottles of beer.\n" +
-      "Take one down and pass it around, " +
-      "1 bottle of beer on the wall.\n"
-    else
-    "#{num} bottles of beer on the wall, " +
-      "#{num} bottles of beer.\n" +
-      "Take one down and pass it around, " +
-      "#{num-1} bottles of beer on the wall.\n"
-    end
+    "#{count_beers(num).capitalize} on the wall, " +
+    "#{count_beers(num)}.\n" +
+    action(num) +
+    "#{count_beers((num-1) % 100)} on the wall.\n"
   end
 
   def verses(first, last)
@@ -34,5 +16,23 @@ class Bottles
 
   def song
     verses(BOTTLE_COUNT, 0)
+  end
+
+  private
+
+  def count_beers(num)
+    case num
+    when 0 then "no more bottles of beer"
+    when 1 then "1 bottle of beer"
+    else "#{num} bottles of beer"
+    end
+  end
+
+  def action(num)
+    if num == 0
+      "Go to the store and buy some more, "
+    else
+      "Take #{num == 1 ? 'it' : 'one'} down and pass it around, "
+    end
   end
 end
